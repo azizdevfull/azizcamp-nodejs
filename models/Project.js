@@ -15,7 +15,8 @@ const projectSchema = new Schema({
     ref: 'User'
   },
   attachments: [{ type: Schema.Types.ObjectId, ref: 'Attachment' }],
-  messageBoards: [{ type: Schema.Types.ObjectId, ref: 'MessageBoard' }]
+  messageBoards: [{ type: Schema.Types.ObjectId, ref: 'MessageBoard' }],
+  tasks: [{ type: Schema.Types.ObjectId, ref: 'Task' }]
 });
 
 const Project = mongoose.model('Project', projectSchema);

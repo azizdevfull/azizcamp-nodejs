@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+
+    <h1>Tasks</h1>
+
+    <h1>Create Task</h1>
+    <form action="/projects/<%= project._id %>/tasks" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" required>
+      <button type="submit">Create</button>
+    </form>
+
+    <% if (tasks.length === 0) { %>
+      <p>No Tasks yet.</p>
+    <% } else { %>
+      <ul>
+        <% tasks.forEach((task) => { %>
+          <li>
+            <p><%= task.name %></p>
+          </li>
+          <li>
+            <form action="/projects/<%= project._id %>/tasks/<%= task._id %>?_method=delete" method="post">
+              <input class="button" type="submit" value="Delete" />
+            </form> <br><br>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+    
+    <!-- <a href="/projects/<%= project._id %>/message-boards/new">Create Message Board</a> <br> -->
+    <a href="/projects/<%= project._id %>">Back</a> 
+
+
+
+</body>
+</html>

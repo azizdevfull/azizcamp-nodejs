@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+
+    <h1 align="center"><%= messageBoard.name %></h1>
+
+    <a href="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/edit">Edit</a>
+
+    <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>?_method=delete" method="post">
+      <input class="submit" type="submit" value="Delete" />
+    </form> <br>
+
+    <a href="/projects/<%= project._id %>/message-boards">Back</a>
+
+
+
+    <div>
+      <h2>Add a message:</h2>
+      <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
+        <div>
+          <label for="content">Message:</label>
+          <input type="text" name="text" required>
+        </div>
+        <br>
+        <button type="submit">Create Message</button>
+      </form>
+    </div>
+
+    <div>
+      <h2>Messages:</h2>
+      <% if (messages.length > 0) { %>
+        <ul>
+          <% messages.forEach((message) => { %>
+            <li><%= message.text %> - by <%= message.author %></li>
+            <li>
+          <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages/<%= message._id %>?_method=delete" method="post">
+            <input class="submit" type="submit" value="Delete" />
+          </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No messages found.</p>
+      <% } %>
+    </div>
+
+  </body>
+</html>
