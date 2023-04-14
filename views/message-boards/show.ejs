@@ -9,6 +9,12 @@
 
     <h1 align="center"><%= messageBoard.name %></h1>
 
+    <a href="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/edit">Edit</a>
+
+    <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>?_method=delete" method="post">
+      <input class="submit" type="submit" value="Delete" />
+    </form> <br>
+
     <a href="/projects/<%= project._id %>/message-boards">Back</a>
 
 
@@ -18,7 +24,7 @@
       <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
         <div>
           <label for="content">Message:</label>
-          <input type="text" name="text">
+          <input type="text" name="text" required>
         </div>
         <br>
         <button type="submit">Create Message</button>
