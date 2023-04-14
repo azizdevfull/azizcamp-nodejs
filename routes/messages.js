@@ -2,75 +2,77 @@ const express = require('express');
 const router = express.Router();
 const MessageBoard = require('../models/MessageBoard');
 const Message = require('../models/Message');
-
-// Route to display a list of all messages
-router.get('/message-boards/:messageBoardId/messages', async (req, res) => {
-  try {
-    const messageBoard = await MessageBoard.findById(req.params.messageBoardId).populate('messages');
-    if (!messageBoard) {
-      return res.status(404).json({ message: 'Message board not found' });
-    }
-    res.render('messages/index', { messageBoard });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// Route to display the form for creating a new message
-router.get('/message-boards/:messageBoardId/messages/new', async (req, res) => {
-  try {
-    const messageBoard = await MessageBoard.findById(req.params.messageBoardId);
-    if (!messageBoard) {
-      return res.status(404).json({ message: 'Message board not found' });
-    }
-    res.render('messages/new', { messageBoard });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+const Project = require('../models/Project');
 
 // Route to handle the submission of a new message
-router.post('/message-boards/:messageBoardId/messages', async (req, res) => {
+router.post('/projects/:projectId/message-boards/:messageBoardId/messages', async (req, res) => {
   try {
-    const messageBoard = await MessageBoard.findById(req.params.messageBoardId);
-    if (!messageBoard) {
-      return res.status(404).json({ message: 'Message board not found' });
+    const { projectId, messageBoardId } = req.params;
+    const { text } = req.body;
+
+    // Check if project exists
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).send('Project not found');
     }
-    const message = new Message({
-      text: req.body.text,
-      messageBoard: messageBoard._id
-    });
+
+    // Check if message board exists in the project
+    const messageBoard = await MessageBoard.findOne({ _id: messageBoardId, project: projectId });
+    if (!messageBoard) {
+      return res.status(404).send('Message board not found');
+    }
+
+    // Create new message
+    const message = new Message({ text, messageBoard, author: req.session.user.username });
     await message.save();
-    messageBoard.messages.push(message._id);
+
+    // Add the message to the message board
+    messageBoard.messages.push(message);
     await messageBoard.save();
-    res.redirect(`/message-boards/${messageBoard._id}/messages`);
+
+    res.redirect(`/projects/${projectId}/message-boards/${messageBoardId}`);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).send('Server error');
   }
 });
 
-// Route to handle the deletion of a message
-router.delete('/message-boards/:messageBoardId/messages/:messageId', async (req, res) => {
+// Route to handle deleting a message
+router.delete('/projects/:projectId/message-boards/:messageBoardId/messages/:messageId', async (req, res) => {
   try {
-    const messageBoard = await MessageBoard.findById(req.params.messageBoardId);
+    const { projectId, messageBoardId, messageId } = req.params;
+
+    // Check if project exists
+    const project = await Project.findById(projectId);
+    if (!project) {
+      return res.status(404).send('Project not found');
+    }
+
+    // Check if message board exists in the project
+    const messageBoard = await MessageBoard.findOne({ _id: messageBoardId, project: projectId });
     if (!messageBoard) {
-      return res.status(404).json({ message: 'Message board not found' });
+      return res.status(404).send('Message board not found');
     }
-    const message = await Message.findById(req.params.messageId);
+
+    // Check if message exists in the message board
+    const message = await Message.findOne({ _id: messageId, messageBoard: messageBoardId });
     if (!message) {
-      return res.status(404).json({ message: 'Message not found' });
+      return res.status(404).send('Message not found');
     }
-    await message.remove();
-    messageBoard.messages.pull(message._id);
+
+    // Delete the message
+    await Message.findByIdAndRemove(message._id);
+
+    // Remove the message from the message board
+    messageBoard.messages = messageBoard.messages.filter(msg => msg.toString() !== messageId);
     await messageBoard.save();
-    res.redirect(`/message-boards/${messageBoard._id}/messages`);
+
+    res.redirect(`/projects/${projectId}/message-boards/${messageBoardId}`);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).send('Server error');
   }
 });
+
 
 module.exports = router;

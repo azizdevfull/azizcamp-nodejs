@@ -7,6 +7,7 @@ const DreamRouter = require("./dreams")
 const ProjectRouter = require("./projects")
 const AttachmentRouter = require("./attachments")
 const MessageBoardRouter = require("./message_boards")
+const MessageRouter = require("./messages")
 
 const checkUser = (req, res, next) => {
     const user = req.session.user;
@@ -36,6 +37,7 @@ router.use("/dreams",checkUser, DreamRouter)
 router.use("/projects",checkUser, ProjectRouter)
 router.use("/",checkUser, AttachmentRouter)
 router.use("/",checkUser, MessageBoardRouter)
+router.use("/",checkUser, MessageRouter)
 
 ///////////////////////////////
 // Router Routes

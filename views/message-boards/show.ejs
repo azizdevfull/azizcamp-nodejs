@@ -11,13 +11,37 @@
 
     <a href="/projects/<%= project._id %>/message-boards">Back</a>
 
-    <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
-      <div>
-        <label for="content">Message:</label>
-        <textarea id="content" name="content" rows="5" cols="50"></textarea>
-      </div>
-      <br>
-      <button type="submit">Create Message</button>
-    </form>
+
+
+    <div>
+      <h2>Add a message:</h2>
+      <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
+        <div>
+          <label for="content">Message:</label>
+          <input type="text" name="text">
+        </div>
+        <br>
+        <button type="submit">Create Message</button>
+      </form>
+    </div>
+
+    <div>
+      <h2>Messages:</h2>
+      <% if (messages.length > 0) { %>
+        <ul>
+          <% messages.forEach((message) => { %>
+            <li><%= message.text %> - by <%= message.author %></li>
+            <li>
+          <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages/<%= message._id %>?_method=delete" method="post">
+            <input class="submit" type="submit" value="Delete" />
+          </form>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>No messages found.</p>
+      <% } %>
+    </div>
+
   </body>
 </html>

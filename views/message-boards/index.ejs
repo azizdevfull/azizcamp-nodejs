@@ -23,7 +23,11 @@
     
     <a href="/projects/<%= project._id %>/message-boards/new">Create Message Board</a>
 
-
+    <% messages.forEach((message) => { %>
+      <li>
+        <p><%= message.text %></p>
+      </li>
+    <% }); %>
 
 
 

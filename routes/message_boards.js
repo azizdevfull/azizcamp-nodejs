@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const MessageBoard = require('../models/MessageBoard');
 const Project = require('../models/Project');
+const Message = require('../models/Message');
 
 // Route to display all message boards
 router.get('/projects/:id/message-boards', async (req, res) => {
@@ -66,11 +67,14 @@ router.get('/projects/:projectId/message-boards/:messageBoardId', async (req, re
       return res.status(404).json({ message: 'Message board not found' });
     }
 
-    res.render('message-boards/show', { project, messageBoard });
+    const messages = await Message.find({ messageBoard: messageBoard._id });
+
+    res.render('message-boards/show', { project, messageBoard, messages });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 module.exports = router;
