@@ -4,7 +4,7 @@
 const router = require("express").Router()
 const AuthRouter = require("./auth")
 const DreamRouter = require("./dreams")
-
+const ProjectRouter = require("./projects")
 
 const checkUser = (req, res, next) => {
     const user = req.session.user;
@@ -29,8 +29,9 @@ const checkUser = (req, res, next) => {
 ///////////////////////////////
 // Router Specific Middleware
 ////////////////////////////////
-router.use("/auth",redirectLoggedInUser,AuthRouter)
+router.use("/auth",AuthRouter)
 router.use("/dreams",checkUser, DreamRouter)
+router.use("/projects",checkUser, ProjectRouter)
 
 ///////////////////////////////
 // Router Routes

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">Projects</h2>
+      <a href="/dashboard">Back</a> <br>
+      <a href="/projects/new">Create Project</a> <br>
+      
+      <% for (project of projects) { %>
+
+        <h3><%= project.name %></h3>
+        <p><%= project.description %></p>
+        <a href="/projects/<%= project._id %>">Show</a> <br> 
+      <% } %>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>

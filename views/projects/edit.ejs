@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">Project</h2>
+      <a href="/projects">Back</a>
+
+      <form action="/projects/<%= project._id %>?_method=PUT" method="post">
+        <input
+        class="input"
+        type="text"
+        name="name"
+        placeholder="Update Project",
+        value="<%= project.name %>"
+      />
+      <textarea name="description"cols="30" rows="10"> <%= project.description %> </textarea>
+        <input class="button" type="submit" value="Update Project" />
+      </form>
+
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">New Project</h2>
+      <a href="/projects">Back</a>
+      <form action="/projects/" method="post">
+        <input
+          class="input"
+          type="text"
+          name="name"
+          placeholder="new project"
+        />
+        <textarea name="description" rows="10"></textarea>
+        <input class="button" type="submit" value="Create Project" />
+      </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>
