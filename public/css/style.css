@@ -1,0 +1,17 @@
+h1.title, h3.title {
+    text-align: center;
+    padding: 10px;
+}
+
+main {
+    text-align: center;
+    margin: 10px;
+    min-height: 70vh;
+}
+
+input {
+    display: block !important;
+    margin: 7px auto;
+    max-width: 40% !important;
+
+}

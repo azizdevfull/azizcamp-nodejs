@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">Dreams</h2>
+      <a href="/dashboard">DASHBOARD</a>
+
+      <h3 class="title is-3"><%= dream.text %></h3>
+
+      <form action="/dreams/<%= dream._id %>?_method=PUT" method="post">
+        <input
+          class="input"
+          type="text"
+          name="text"
+          placeholder="new dream"
+          value="<%= dream.text %>"
+        />
+        <input class="button" type="submit" value="edit dream" />
+      </form>
+
+      <form action="/dreams/<%= dream._id %>?_method=delete" method="post">
+        <input class="button" type="submit" value="Delete dream" />
+      </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>

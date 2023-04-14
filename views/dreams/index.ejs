@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+    <main>
+      <h2 class="subtitle is-2">Dreams</h2>
+      <a href="/dashboard">DASHBOARD</a>
+      <% for (dream of dreams) { %>
+
+        <a href="/dreams/<%= dream._id %>"><h3><%= dream.text %></h3></a>
+
+      <% } %>
+      <form action="/dreams/" method="post">
+        <input
+          class="input"
+          type="text"
+          name="text"
+          placeholder="new dream"
+        />
+        <input class="button" type="submit" value="create dream" />
+      </form>
+    </main>
+    <!-- THE HEAD TAG PARTIAL -->
+    <%- include("../partials/footer") %>
+  </body>
+</html>
