@@ -4,6 +4,8 @@
   <%- include("../partials/head") %>
 
   <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
     <h1>Attachments</h1>
 
     <h1>Add Attachment to <%= project.name %></h1>
@@ -33,5 +35,7 @@
         <% }) %>
       </ul>
     <% } %>
+    
+    <%- include("../partials/footer") %>
   </body>
 </html>
