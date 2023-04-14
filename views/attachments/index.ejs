@@ -24,9 +24,9 @@
     <% } else { %>
       <ul>
         <% attachments.forEach((attachment) => { %>
-          <li><a href="/attachments/<%= attachment._id %>/download"><%= attachment.filename %></a></li>
+          <li><a href="/projects/<%= project._id %>/attachments/<%= attachment._id %>/download"><%= attachment.filename %></a></li>
           <li>
-            <form action="/attachments/<%= attachment._id %>?_method=delete" method="post">
+            <form action="/projects/<%= project._id %>/attachments/<%= attachment._id %>?_method=delete" method="post">
               <input class="button" type="submit" value="Delete Attachment" />
             </form>
           </li>
