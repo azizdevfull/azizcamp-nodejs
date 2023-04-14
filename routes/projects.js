@@ -5,6 +5,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Project = require("../models/Projects");
 const auth = require("./authMiddleware");
+const { create, show, edit, update, newProject, destroy } = require("../controllers/project.controller");
 
 ///////////////////////////////
 // Router Specific Middleware
@@ -22,52 +23,18 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.get("/new", async (req, res) => {
-  res.render("projects/new");
-});
+router.get("/new", newProject);
 
-router.post("/", async (req, res) => {
-  req.body.user = req.session.user.id;
-  await Project.create(req.body);
-  res.redirect("/projects/");
-});
+router.post("/", create);
 
 
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const project = await Project.findOne({ _id: id, user: req.session.user.id });
-  console.log(project)
-  if (project) {
-    res.render("projects/show", {
-        project,
-    });
-  } else {
-    res.status(400).json({ error: "No Project of This ID for this user" });
-  }
-});
+router.get("/:id", show);
 
-router.get("/:id/edit", async (req, res) => {
-  const id = req.params.id;
-  const project = await Project.findOne({ _id: id, user: req.session.user.id });
-  console.log(project)
-  if (project) {
-    res.render("projects/edit", {
-        project,
-    });
-  } else {
-    res.status(400).json({ error: "No Project of This ID for this user" });
-  }
-});
+router.get("/:id/edit", edit);
 
-router.put("/:id", async (req, res) => {
-  await Project.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect("/projects");
-});
+router.put("/:id", update);
 
-router.delete("/:id", async (req, res) => {
-  await Project.findByIdAndRemove(req.params.id);
-  res.redirect("/projects");
-});
+router.delete("/:id", destroy);
 
 ///////////////////////////////
 // Export Router
