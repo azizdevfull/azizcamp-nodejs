@@ -11,7 +11,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 const cors = require("cors");
 // GET PORT FROM ENV OR DEFAULT PORT
-const PORT = process.env.PORT || "2021";
+const PORT = process.env.PORT || "3000";
 const SECRET = process.env.SECRET || "secret"
 const HomeRouter = require("./routes/home.js");
 // Sessions Middleware
