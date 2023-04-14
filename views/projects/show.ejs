@@ -18,9 +18,15 @@
 
       <form action="/projects/<%= project._id %>?_method=delete" method="post">
         <input class="button" type="submit" value="Delete Project" />
-      </form>
+      </form> <br><br>
+      <div>
+        <a href="/projects/<%= project._id %>/attachments">Attachments</a>
+  
+      </div>
+    
+    
     </main>
-    <!-- THE HEAD TAG PARTIAL -->
-    <%- include("../partials/footer") %>
+
+
   </body>
 </html>

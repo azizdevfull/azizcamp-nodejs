@@ -13,7 +13,8 @@ const projectSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  attachments: [{ type: Schema.Types.ObjectId, ref: 'Attachment' }]
 });
 
 const Project = mongoose.model('Project', projectSchema);

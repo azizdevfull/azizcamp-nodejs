@@ -5,6 +5,7 @@ const router = require("express").Router()
 const AuthRouter = require("./auth")
 const DreamRouter = require("./dreams")
 const ProjectRouter = require("./projects")
+const AttachmentRouter = require("./attachments")
 
 const checkUser = (req, res, next) => {
     const user = req.session.user;
@@ -32,6 +33,7 @@ const checkUser = (req, res, next) => {
 router.use("/auth",AuthRouter)
 router.use("/dreams",checkUser, DreamRouter)
 router.use("/projects",checkUser, ProjectRouter)
+router.use("/",checkUser, AttachmentRouter)
 
 ///////////////////////////////
 // Router Routes

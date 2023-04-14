@@ -3,7 +3,7 @@
 ////////////////////////////////
 const router = require("express").Router();
 const User = require("../models/User");
-const Project = require("../models/Projects");
+const Project = require("../models/Project");
 const auth = require("./authMiddleware");
 const { create, show, edit, update, newProject, destroy } = require("../controllers/project.controller");
 
