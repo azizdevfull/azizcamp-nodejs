@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+
+    <h1 align="center"><%= messageBoard.name %></h1>
+
+    <a href="/projects/<%= project._id %>/message-boards">Back</a>
+
+    <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
+      <div>
+        <label for="content">Message:</label>
+        <textarea id="content" name="content" rows="5" cols="50"></textarea>
+      </div>
+      <br>
+      <button type="submit">Create Message</button>
+    </form>
+  </body>
+</html>

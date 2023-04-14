@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- THE HEAD TAG PARTIAL -->
+  <%- include("../partials/head") %>
+
+  <body>
+    <!-- THE HEADER TAG PARTIAL -->
+    <%- include("../partials/header") %>
+
+    <!DOCTYPE html>
+    <h1>Message Boards</h1>
+    <% if (messageBoards.length === 0) { %>
+      <p>No message boards yet.</p>
+    <% } else { %>
+      <ul>
+        <% messageBoards.forEach((messageBoard) => { %>
+          <li>
+            <a href="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>"><%= messageBoard.name %></a>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+    
+    <a href="/projects/<%= project._id %>/message-boards/new">Create Message Board</a>
+
+
+
+
+
+</body>
+</html>
