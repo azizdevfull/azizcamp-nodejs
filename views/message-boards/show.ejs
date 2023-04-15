@@ -1,45 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-  <!-- THE HEAD TAG PARTIAL -->
-  <%- include("../partials/head") %>
-
-  <body>
-    <!-- THE HEADER TAG PARTIAL -->
-    <%- include("../partials/header") %>
-
-    <h1 align="center"><%= messageBoard.name %></h1>
-
-    <a href="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/edit">Edit</a>
-
-    <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>?_method=delete" method="post">
-      <input class="submit" type="submit" value="Delete" />
-    </form> <br>
-
-    <a href="/projects/<%= project._id %>/message-boards">Back</a>
+<%- include('../layout/header')  %>
 
 
+<h2 class="subtitle is-2" style="margin-top: -5%; font-size: 1em;"><%= messageBoard.name %></h2>
 
-    <div>
-      <h2>Add a message:</h2>
+<div>
+  <a href="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/edit" class="button-74" style="margin-right: -79%;">Edit</a>
+</div>
+<div>
+  <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>?_method=delete" method="post">
+    <button type="submit" class="button-30" style="margin-right: -79%; margin-top: 5px;">Delete</button>
+  </form> 
+</div>
+
+<div style="margin-left: 21px;">
+  <a href="/projects/<%= project._id %>/message-boards"class="button-86" style="margin-top: -50px;">Back</a>
+</div>
+
+
       <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages" method="POST">
         <div>
           <label for="content">Message:</label>
-          <input type="text" name="text" required>
+          <input type="text" class="text" name="text" required>
         </div>
         <br>
-        <button type="submit">Create Message</button>
+        <button type="submit" class="sub">Create Message</button>
       </form>
-    </div>
 
     <div>
       <h2>Messages:</h2>
       <% if (messages.length > 0) { %>
         <ul>
           <% messages.forEach((message) => { %>
-            <li><%= message.text %> - by <%= message.author %></li>
+            <b>
+              <%= message.text %> - by <%= message.author %>
+
+            </b>
             <li>
           <form action="/projects/<%= project._id %>/message-boards/<%= messageBoard._id %>/messages/<%= message._id %>?_method=delete" method="post">
-            <input class="submit" type="submit" value="Delete" />
+            <input type="submit" class="sxx" style="background-color: #c82333;  align-items: center;background-color: #FFE7E7;background-position: 0 0;border: 1px solid #FEE0E0;
+            
+            " value="Delete" />
           </form>
             </li>
           <% }); %>
@@ -49,5 +49,385 @@
       <% } %>
     </div>
 
-  </body>
-</html>
+    <%- include('../layout/footer')  %>
+
+
+
+    <style>
+.sxx{
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.text {
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.sub {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sub:hover {
+  background-color: #0062cc;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* form[action$="?_method=delete"] {
+  display: inline-block;
+} */
+
+.sur.submit {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sur.submit:hover {
+  background-color: #c82333;
+}
+
+
+/* CSS */
+.button-30 {
+  align-items: center;
+  background-color: #FFE7E7;
+  background-position: 0 0;
+  border: 1px solid #FEE0E0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #D33A2C;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(237, 119, 243, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(192, 171, 239, 0.4) 0 4px 8px, rgba(255, 169, 255, 0.3) 0 7px 13px -3px, #f7dbf7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #ce51ce 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* CSS */
+.button-86 {
+    
+    all: unset;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    position: absolute;
+    color: #f0f0f0;
+    cursor: pointer;
+    z-index: 1;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-86::after,
+  .button-86::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -99999;
+    transition: all .4s;
+  }
+  
+  .button-86::before {
+    transform: translate(0%, 0%);
+    width: 100%;
+    height: 100%;
+    background: #28282d;
+    border-radius: 10px;
+  }
+  
+  .button-86::after {
+    transform: translate(10px, 10px);
+    width: 35px;
+    height: 35px;
+    background: #ffffff15;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 50px;
+  }
+  
+  .button-86:hover::before {
+    transform: translate(5%, 20%);
+    width: 110%;
+    height: 110%;
+  }
+  
+  .button-86:hover::after {
+    border-radius: 10px;
+    transform: translate(0, 0);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .button-86:active::after {
+    transition: 0s;
+    transform: translate(0, 5%);
+  }
+
+
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;
+}
+
+
+/* body {
+  background-color: #000;
+} */
+.ag-courses_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  padding: 50px 0;
+}
+.ag-courses_item {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+
+  margin: 0 15px 30px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+.ag-courses-item_link {
+  display: block;
+  padding: 30px 20px;
+  background-color: #121212;
+
+  overflow: hidden;
+
+  position: relative;
+}
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #FFF;
+}
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+.ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date-box {
+  font-size: 18px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date {
+  font-weight: bold;
+  color: #f9b234;
+
+  -webkit-transition: color .5s ease;
+  -o-transition: color .5s ease;
+  transition: color .5s ease
+}
+.ag-courses-item_bg {
+  height: 128px;
+  width: 128px;
+  background-color: #f9b234;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+  background-color: #3ecd5e;
+}
+.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+  background-color: #e44002;
+}
+.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+  background-color: #952aff;
+}
+.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+  background-color: #cd3e94;
+}
+.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+  background-color: #4c49ea;
+}
+
+
+
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+  }
+  .ag-courses-item_title {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+  .ag-courses-item_title {
+    min-height: 72px;
+    line-height: 1;
+
+    font-size: 24px;
+  }
+  .ag-courses-item_link {
+    padding: 22px 40px;
+  }
+  .ag-courses-item_date-box {
+    font-size: 16px;
+  }
+}
+
+
+/* CSS */
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+    
+    </style>

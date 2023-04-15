@@ -1,34 +1,322 @@
-<!DOCTYPE html>
-<html lang="en">
-  <!-- THE HEAD TAG PARTIAL -->
-  <%- include("../partials/head") %>
+<%- include('../layout/header')  %>
+<link rel="stylesheet" href="/css/projects.css">
 
-  <body>
-    <!-- THE HEADER TAG PARTIAL -->
-    <%- include("../partials/header") %>
-    <main>
-      <h2 class="subtitle is-2">Project</h2>
-      <a href="/projects">Back</a>
+      <h2 class="subtitle is-2" style="margin-top: -10%;"><%= project.name %></h2>
 
-      <h3 class="title is-3"><%= project.name %></h3> <br>
-      <p class="title is-3"> <%= project.description %> </p>
+      <p> <%= project.description %> </p>
 
-      <br>
-        <a href="/projects/<%= project._id %>/edit">Edit</a> <br>
-
-      <form action="/projects/<%= project._id %>?_method=delete" method="post">
-        <input class="button" type="submit" value="Delete Project" />
-      </form> <br><br>
       <div>
-        <a href="/projects/<%= project._id %>/attachments">Attachments</a> <br>
-        <a href="/projects/<%= project._id %>/message-boards">Message Boards</a> <br>
-        <a href="/projects/<%= project._id %>/tasks">Tasks</a> <br>
-  
+        <a href="/projects/<%= project._id %>/edit" class="button-74" style="margin-right: -79%;">Edit</a>
       </div>
-    
-    
-    </main>
+   <div>
+        <!-- <a href="/projects/<%= project._id %>/edit" >Edit</a> -->
+        <form action="/projects/<%= project._id %>?_method=delete" method="post">
+          <button type="submit" class="button-30" style="margin-right: -79%;">Delete Project</button>
+        </form> 
+    </div>
+      
+      <div style="margin-left: 21px;">
+        <a href="/projects"class="button-86" style="margin-top: -50px;">Back</a>
+      </div>
 
 
-  </body>
-</html>
+    
+         
+
+
+
+      <div class="ag-format-container">
+        <div class="ag-courses_box">
+          
+          <div class="ag-courses_item">
+            <a href="/projects/<%= project._id %>/attachments" class="ag-courses-item_link">
+              <div class="ag-courses-item_bg"></div>
+      
+              <div class="ag-courses-item_title" style="text-decoration: none;" >
+                Attachments
+              </div>
+            </a>
+          </div>
+
+    
+              <div class="ag-courses_item">
+                <a href="/projects/<%= project._id %>/message-boards" class="ag-courses-item_link">
+                  <div class="ag-courses-item_bg"></div>
+          
+                  <div class="ag-courses-item_title" style="text-decoration: none;" >
+                    Message Boards
+                  </div>
+                </a>
+              </div>
+
+       
+                  
+                  <div class="ag-courses_item">
+                    <a href="/projects/<%= project._id %>/tasks" class="ag-courses-item_link">
+                      <div class="ag-courses-item_bg"></div>
+              
+                      <div class="ag-courses-item_title" style="text-decoration: none;" >
+                        Tasks
+                      </div>
+                    </a>
+                  </div>
+         
+        
+        </div>
+      </div>
+
+      <%- include('../layout/footer')  %>
+
+
+      <style>
+
+
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;
+}
+
+
+/* body {
+  background-color: #000;
+} */
+.ag-courses_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  padding: 50px 0;
+}
+.ag-courses_item {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+
+  margin: 0 15px 30px;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+}
+.ag-courses-item_link {
+  display: block;
+  padding: 30px 20px;
+  background-color: #121212;
+
+  overflow: hidden;
+
+  position: relative;
+}
+.ag-courses-item_link:hover,
+.ag-courses-item_link:hover .ag-courses-item_date {
+  text-decoration: none;
+  color: #FFF;
+}
+.ag-courses-item_link:hover .ag-courses-item_bg {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+.ag-courses-item_title {
+  min-height: 87px;
+  margin: 0 0 25px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 30px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date-box {
+  font-size: 18px;
+  color: #FFF;
+
+  z-index: 2;
+  position: relative;
+}
+.ag-courses-item_date {
+  font-weight: bold;
+  color: #f9b234;
+
+  -webkit-transition: color .5s ease;
+  -o-transition: color .5s ease;
+  transition: color .5s ease
+}
+.ag-courses-item_bg {
+  height: 128px;
+  width: 128px;
+  background-color: #f9b234;
+
+  z-index: 1;
+  position: absolute;
+  top: -75px;
+  right: -75px;
+
+  border-radius: 50%;
+
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+.ag-courses_item:nth-child(2n) .ag-courses-item_bg {
+  background-color: #3ecd5e;
+}
+.ag-courses_item:nth-child(3n) .ag-courses-item_bg {
+  background-color: #e44002;
+}
+.ag-courses_item:nth-child(4n) .ag-courses-item_bg {
+  background-color: #952aff;
+}
+.ag-courses_item:nth-child(5n) .ag-courses-item_bg {
+  background-color: #cd3e94;
+}
+.ag-courses_item:nth-child(6n) .ag-courses-item_bg {
+  background-color: #4c49ea;
+}
+
+
+
+@media only screen and (max-width: 979px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+  }
+  .ag-courses-item_title {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+@media only screen and (max-width: 639px) {
+  .ag-courses_item {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+  .ag-courses-item_title {
+    min-height: 72px;
+    line-height: 1;
+
+    font-size: 24px;
+  }
+  .ag-courses-item_link {
+    padding: 22px 40px;
+  }
+  .ag-courses-item_date-box {
+    font-size: 16px;
+  }
+}
+
+/* CSS */
+.button-30 {
+  align-items: center;
+  background-color: #FFE7E7;
+  background-position: 0 0;
+  border: 1px solid #FEE0E0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #D33A2C;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "JetBrains Mono",monospace;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow .15s,transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow,transform;
+  font-size: 18px;
+}
+
+.button-30:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(237, 119, 243, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.button-30:hover {
+  box-shadow: rgba(192, 171, 239, 0.4) 0 4px 8px, rgba(255, 169, 255, 0.3) 0 7px 13px -3px, #f7dbf7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.button-30:active {
+  box-shadow: #ce51ce 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+/* <!-- HTML !-->
+<button class="button-45" role="button">Button 45</button>
+
+CSS */
+.button-45 {
+  align-items: center;
+  background-color: #FFE7E7;
+  background-position: 0 0;
+  border: 1px solid #FEE0E0;
+  border-radius: 11px;
+  box-sizing: border-box;
+  color: #D33A2C;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 33.4929px;
+  list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+  padding: 2px 12px;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: break-word;
+}
+
+.button-45:active,
+.button-45:hover,
+.button-45:focus {
+  outline: 0;
+}
+
+
+.button-45:active {
+  background-color: #D33A2C;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #FFFFFF;
+}
+
+.button-45:hover {
+  background-color: #FFE3E3;
+  border-color: #FAA4A4;
+}
+
+.button-45:active:hover,
+.button-45:focus:hover,
+.button-45:focus {
+  background-color: #D33A2C;
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #FFFFFF;
+}
+      </style>

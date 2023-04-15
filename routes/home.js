@@ -15,7 +15,7 @@ const checkUser = (req, res, next) => {
       res.locals.user = user;
       next();
     } else {
-      res.redirect("/auth/login");
+      res.redirect("/auth/signup");
     }
   }
   

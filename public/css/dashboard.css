@@ -1,0 +1,55 @@
+apply a basic reset to remove default browser styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* set a default font and background color */
+  body {
+    font-family: Arial, sans-serif;
+    padding-top: 200px;
+  }
+  
+  /* style the main content area */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* style the heading */
+  h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  /* style the buttons */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* style the logout button */
+  button:last-of-type {
+    background-color: #007bff;
+  }
+  
+  button:last-of-type:hover {
+    background-color: #007bff;
+  }
+  .ttr{
+    text-align: center;
+  }
