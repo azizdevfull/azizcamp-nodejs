@@ -10,6 +10,7 @@ const SECRET = process.env.SECRET || "secret"
 const HomeRouter = require("./routes/home.js");
 const session = require("express-session");
 const connect = require("connect-mongodb-session")(session)
+const csrf = require("lusca").csrf;
 // const path = require('path');
 
 
@@ -42,6 +43,7 @@ app.use(
   })
 );
 
+app.use(csrf());
 
 app.use("/", HomeRouter);
 
