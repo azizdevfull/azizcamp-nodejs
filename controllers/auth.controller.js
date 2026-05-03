@@ -70,7 +70,8 @@ const signup = async (req, res) => {
         res.status(400).json({ error: "User Does Not Exist" });
       }
     } catch (error) {
-      res.status(400).json(error);
+      console.error(error);
+      return res.status(500).json({ error: "Server error" });
     }
   }
   
