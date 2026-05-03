@@ -18,10 +18,15 @@ const writeLimiter = rateLimit({
   max: 30,
 });
 
+const readLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
+
 ///////////////////////////////
 // Router Routes
 ////////////////////////////////
-router.get("/", async (req, res) => {
+router.get("/", readLimiter, async (req, res) => {
   const projects = await Project.find({ user: req.session.user.id });
   console.log(projects);
   res.render("projects/index", {
