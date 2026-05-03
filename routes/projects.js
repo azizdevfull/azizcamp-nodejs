@@ -5,12 +5,18 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Project = require("../models/Project");
 const auth = require("./authMiddleware");
+const rateLimit = require("express-rate-limit");
 const { create, show, edit, update, newProject, destroy } = require("../controllers/project.controller");
 
 ///////////////////////////////
 // Router Specific Middleware
 ////////////////////////////////
 router.use(auth);
+
+const writeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+});
 
 ///////////////////////////////
 // Router Routes
@@ -25,16 +31,16 @@ router.get("/", async (req, res) => {
 
 router.get("/new", newProject);
 
-router.post("/", create);
+router.post("/", writeLimiter, create);
 
 
 router.get("/:id", show);
 
 router.get("/:id/edit", edit);
 
-router.put("/:id", update);
+router.put("/:id", writeLimiter, update);
 
-router.delete("/:id", destroy);
+router.delete("/:id", writeLimiter, destroy);
 
 ///////////////////////////////
 // Export Router
