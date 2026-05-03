@@ -7,6 +7,11 @@ const signupSchema = Joi.object({
     password: Joi.string().required(),
   });
 
+const loginSchema = Joi.object({
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
 const signup = async (req, res) => {
     try {
       const { error } = signupSchema.validate(req.body);
@@ -14,7 +19,7 @@ const signup = async (req, res) => {
         return res.status(400).json({ error: error.details[0].message });
       }
   
-      const existingUser = await User.findOne({ username: req.body.username });
+      const existingUser = await User.findOne({ username: { $eq: req.body.username } });
       if (existingUser) {
         return res.status(400).json({ error: 'Username already exists' });
       }
@@ -43,8 +48,13 @@ const signup = async (req, res) => {
 
   const login = async (req, res) => {
     try {
+      const { error } = loginSchema.validate(req.body);
+      if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+      }
+
       // First Stop, does the user exist
-      const user = await User.findOne({ username: req.body.username });
+      const user = await User.findOne({ username: { $eq: req.body.username } });
       if (user) {
         const result = await bcrypt.compare(req.body.password, user.password);
         if (result) {
