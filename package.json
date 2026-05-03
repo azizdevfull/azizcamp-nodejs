@@ -29,6 +29,7 @@
     "multer": "^2.0.2",
     "nodemon": "^3.1.11",
     "path": "^0.12.7",
-    "lusca": "^1.7.0"
+    "lusca": "^1.7.0",
+    "express-rate-limit": "^8.4.1"
   }
 }
