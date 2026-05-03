@@ -42,7 +42,20 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  await Dream.findByIdAndUpdate(req.params.id, req.body);
+  const allowedFields = ["title", "description", "dream"];
+  const updates = {};
+
+  for (const field of allowedFields) {
+    if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+      updates[field] = req.body[field];
+    }
+  }
+
+  await Dream.findOneAndUpdate(
+    { _id: req.params.id, user: req.session.user.id },
+    { $set: updates },
+    { runValidators: true }
+  );
   res.redirect("/dreams");
 });
 
