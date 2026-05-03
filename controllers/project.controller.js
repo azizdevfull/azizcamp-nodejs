@@ -41,7 +41,19 @@ const create = async (req, res) => {
   } 
 
   const update = async (req, res) => {
-    await Project.findByIdAndUpdate(req.params.id, req.body);
+    const allowedFields = ["name", "description", "status", "deadline"];
+    const updates = {};
+
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        updates[field] = req.body[field];
+      }
+    }
+
+    await Project.findOneAndUpdate(
+      { _id: req.params.id, user: req.session.user.id },
+      { $set: updates }
+    );
     res.redirect("/projects");
   }
 
