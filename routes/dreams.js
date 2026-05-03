@@ -5,11 +5,19 @@ const router = require("express").Router();
 const User = require("../models/User");
 const Dream = require("../models/Dreams");
 const auth = require("./authMiddleware");
+const rateLimit = require("express-rate-limit");
 
 ///////////////////////////////
 // Router Specific Middleware
 ////////////////////////////////
 router.use(auth);
+
+const dreamsWriteLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 write requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 ///////////////////////////////
 // Router Routes
@@ -41,7 +49,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", dreamsWriteLimiter, async (req, res) => {
   const allowedFields = ["title", "description", "dream"];
   const updates = {};
 
