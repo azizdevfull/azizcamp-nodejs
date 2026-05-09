@@ -29,7 +29,7 @@ const dreamsReadLimiter = rateLimit({
 ///////////////////////////////
 // Router Routes
 ////////////////////////////////
-router.get("/", async (req, res) => {
+router.get("/", dreamsReadLimiter, async (req, res) => {
   const dreams = await Dream.find({ user: req.session.user.id });
   console.log(dreams);
   res.render("dreams/index", {
