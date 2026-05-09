@@ -19,6 +19,13 @@ const dreamsWriteLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const dreamsReadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // limit each IP to 300 read requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 ///////////////////////////////
 // Router Routes
 ////////////////////////////////
@@ -36,7 +43,7 @@ router.post("/", async (req, res) => {
   res.redirect("/dreams/");
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", dreamsReadLimiter, async (req, res) => {
   const id = req.params.id;
   const dream = await Dream.findOne({ _id: id, user: req.session.user.id });
   console.log(dream)
