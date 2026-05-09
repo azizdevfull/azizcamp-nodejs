@@ -1,9 +1,19 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
 const MessageBoard = require('../models/MessageBoard');
 const Project = require('../models/Project');
 const Message = require('../models/Message');
 const { index, newMessageBoard, create, show, destroy, edit, update } = require('../controllers/message_board.controller');
+
+const messageBoardLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+router.use(messageBoardLimiter);
 
 // Route to display all message boards
 router.get('/projects/:id/message-boards',index);
