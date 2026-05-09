@@ -41,7 +41,7 @@ router.post("/", writeLimiter, create);
 
 router.get("/:id", show);
 
-router.get("/:id/edit", edit);
+router.get("/:id/edit", readLimiter, edit);
 
 router.put("/:id", writeLimiter, update);
 
