@@ -39,7 +39,7 @@ router.get("/new", newProject);
 router.post("/", writeLimiter, create);
 
 
-router.get("/:id", show);
+router.get("/:id", readLimiter, show);
 
 router.get("/:id/edit", readLimiter, edit);
 
